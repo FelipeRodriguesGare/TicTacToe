@@ -57,7 +57,6 @@ public class JogoDaVelha {
     }
 
     public boolean play(int position) {
-        System.out.println(this.bot.fakeMove(this.board));
         if (this.playerTurn==1 && this.botExists) position = bot.botMove(this.board);
         int pos = 0;
         for (int i=0; i<3; i++){
