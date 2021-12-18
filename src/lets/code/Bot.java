@@ -61,7 +61,7 @@ public class Bot {
 //        }
         Integer maxVal = Collections.max(playIndex);
         Integer maxIdx = playIndex.indexOf(maxVal);
-
+        System.out.println(playIndex);
         return maxIdx+1;
     }
 
@@ -79,16 +79,23 @@ public class Bot {
         for (String row: this.winnerArray){
             int index = 0;
             int badIndex = 0;
+            boolean flag = true;
+
             for (int i=0; i<row.length(); i++){
+//                "111000000"
                 if(row.charAt(i) == '1' && gameMask.charAt(i) == '1') index++;
                 else if(gameMask.charAt(i) == 'x' && row.charAt(i) == '1') {
                     badIndex--;
                 }
             }
-            if (badIndex<0) index=0;
-            chancesToWin.add(index);
-            chancesToLose.add(badIndex);
+            if (badIndex < 0 && index > 0) chancesToLose.add(0);
+            else chancesToLose.add(badIndex);
+
+            if (badIndex < 0) chancesToWin.add(0);
+            else chancesToWin.add(index);
         }
+        System.out.println(chancesToLose);
+        System.out.println(chancesToWin);
         return custo(chancesToLose.toArray(new Integer[8]),chancesToWin.toArray(new Integer[8]));
     }
 
@@ -113,6 +120,6 @@ public class Bot {
             botCount.putIfAbsent(i, 0);
             p1Count.putIfAbsent(-i,0);
         }
-        return (10*botCount.get(3)+3*botCount.get(2)+botCount.get(1))-(10*p1Count.get(-3)+3*p1Count.get(-2)+p1Count.get(-1));
+        return (100*botCount.get(3)+3*botCount.get(2)+botCount.get(1))-(30*p1Count.get(-3)+10*p1Count.get(-2)+p1Count.get(-1));
     }
 }

@@ -11,10 +11,13 @@ public class Main {
         System.out.print("Play against bot? [y/n]: ");
         String bot = scan.next();
 
-        System.out.print("Chose your symbol! [X/O]: ");
+        System.out.print("Chose your symbol Player1 symbol! [X/O]: ");
         String player = scan.next().toUpperCase(Locale.ROOT);
 
-        JogoDaVelha game = new JogoDaVelha(bot.charAt(0) == 'y', player.charAt(0));
+        System.out.print("Who starts? [1/2]: ");
+        int turn = scan.nextInt();
+
+        JogoDaVelha game = new JogoDaVelha(bot.charAt(0) == 'y', player.charAt(0), turn == 1? 0:1);
         game.printBoard();
         while(!hasWinner) {
             if (game.playerTurn == 1 && game.botExists) {

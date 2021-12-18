@@ -13,11 +13,12 @@ public class JogoDaVelha {
     public boolean botExists = false;
     public int playerTurn = 0;
 
-    public JogoDaVelha(boolean bot, char player) {
+    public JogoDaVelha(boolean bot, char player, int turn) {
         this.players = new String[]{"X", "O"};
         if (player == 'O') this.players = new String[]{"O", "X"};
         this.botExists=bot;
         if (bot) this.bot = new Bot(this.board, this.players);
+        this.playerTurn = turn;
     }
 
     public boolean hasWinner() {
@@ -56,6 +57,7 @@ public class JogoDaVelha {
     }
 
     public boolean play(int position) {
+        System.out.println(this.bot.fakeMove(this.board));
         if (this.playerTurn==1 && this.botExists) position = bot.botMove(this.board);
         int pos = 0;
         for (int i=0; i<3; i++){
