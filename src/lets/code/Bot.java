@@ -34,7 +34,6 @@ public class Bot {
 
     public int fakeMove(String[][] board) {
         ArrayList<Integer> playIndex = new ArrayList<Integer>();
-        ArrayList<Integer> minIndex = new ArrayList<Integer>();
         String[][] auxBoard;
         for (int i=0; i<3; i++){
             for (int j=0; j<3; j++){
@@ -43,25 +42,12 @@ public class Bot {
                     auxBoard[i][j] = this.players[1];
                     int custo = botBoardAvaliation(auxBoard);
                     playIndex.add(custo);
-//                    for (int k=0; k<3; k++){
-//                        if(auxBoard[i][j] == "_") {
-//                            auxBoard[i][k] = this.players[0];
-//                            custo = botBoardAvaliation(auxBoard);
-//                            minIndex.add(custo);
-//                        }
-//                    }
                 } else playIndex.add(-1000);
 
             }
         }
-//        System.out.println(playIndex);
-//        System.out.println(minIndex);
-//        for (int i=0; i<9; i++){
-//            playIndex.set(i,(playIndex.get(i) - minIndex.get(i)));
-//        }
         Integer maxVal = Collections.max(playIndex);
         Integer maxIdx = playIndex.indexOf(maxVal);
-        System.out.println(playIndex);
         return maxIdx+1;
     }
 
@@ -79,10 +65,7 @@ public class Bot {
         for (String row: this.winnerArray){
             int index = 0;
             int badIndex = 0;
-            boolean flag = true;
-
             for (int i=0; i<row.length(); i++){
-//                "111000000"
                 if(row.charAt(i) == '1' && gameMask.charAt(i) == '1') index++;
                 else if(gameMask.charAt(i) == 'x' && row.charAt(i) == '1') {
                     badIndex--;
@@ -94,8 +77,6 @@ public class Bot {
             if (badIndex < 0) chancesToWin.add(0);
             else chancesToWin.add(index);
         }
-        System.out.println(chancesToLose);
-        System.out.println(chancesToWin);
         return custo(chancesToLose.toArray(new Integer[8]),chancesToWin.toArray(new Integer[8]));
     }
 
