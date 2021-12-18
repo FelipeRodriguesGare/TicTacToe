@@ -17,7 +17,7 @@ public class Main {
         JogoDaVelha game = new JogoDaVelha(bot.charAt(0) == 'y', player.charAt(0));
         game.printBoard();
         while(!hasWinner) {
-            if (game.playerTurn == 0 && game.botExists) {
+            if (game.playerTurn == 1 && game.botExists) {
                 System.out.println("Bot Turn :)!");
                 game.play('1');
             } else{
